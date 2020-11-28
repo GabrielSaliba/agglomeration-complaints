@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Agglomeration} from '../../models/agglomeration';
 import {AgglomerationService} from '../../services/agglomeration.service';
-import {Observable} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {Location} from '../../models/location';
 import {Image} from '../../models/image';
@@ -19,6 +18,7 @@ export class AgglomerationComponent implements OnInit {
   fileToUpload: File = null;
   location = {} as Location;
   showEdit = false;
+  pageRef = window.location.href;
 
   constructor(private agglomerationService: AgglomerationService) {
   }

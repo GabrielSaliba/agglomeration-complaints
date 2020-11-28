@@ -16,7 +16,6 @@
         <th pSortableColumn="observation">Observação <p-sortIcon field="observation"></p-sortIcon></th>
         <th pSortableColumn="agglomerationType">Tipo <p-sortIcon field="agglomerationType"></p-sortIcon></th>
         <th pSortableColumn="location">Localização <p-sortIcon field="location"></p-sortIcon></th>
-        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -30,6 +29,7 @@
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editAgglomeration(item)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="delete(item.id)"></button>
+          <a style="margin-left: 20%" href="https://www.facebook.com/sharer/sharer.php?u={{pageRef}}">Compartilhar</a>
         </td>
       </tr>
     </ng-template>
