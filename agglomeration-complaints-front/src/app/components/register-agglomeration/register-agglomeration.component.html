@@ -1,0 +1,57 @@
+<br><br><br><br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <div class="card add-car">
+            <h5 class="card-header">Registrar Aglomeração</h5>
+            <div class="card-body">
+              <form id="add-form" (ngSubmit)="f.form.valid && saveAgglomeration(f)" #f="ngForm" novalidate>
+                <div class="form-group">
+                  <label for="model">Nome</label>
+                  <input type="text" [(ngModel)]="agglomeration.name" id="model" name="model" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }" placeholder="Digite o nome">
+                  <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                    <div *ngIf="model.errors.required">Nome é obrigatório</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="color">Observação</label>
+                  <input type="text" [(ngModel)]="agglomeration.observation" id="color" name="color" #color="ngModel" class="form-control" placeholder="Escreva uma observação">
+                </div>
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="file">Foto</label><br>
+                    <button pButton (click)="onClick()" label="Carregar">
+                    </button>
+                    <p *ngIf="image.id != null">Imagem selecionada</p>
+                    <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*" style="display:none;" />
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group">
+                    <label for="color">Endereço</label>
+                    <input type="text" [(ngModel)]="location.fullAddress" id="color" name="color" #color="ngModel" class="form-control" placeholder="Escreva uma observação">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="agglomerationType">Tipo</label>
+                  <input type="text" [(ngModel)]="agglomeration.agglomerationType" id="agglomerationType" name="agglomerationType" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }" placeholder="Digite o tipo da aglomeração">
+                  <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                    <div *ngIf="model.errors.required">Tipo é obrigatório</div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-add-car">Salvar</button>
+                <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanForm(f)">Cancelar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

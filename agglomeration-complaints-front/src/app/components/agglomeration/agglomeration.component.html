@@ -1,0 +1,78 @@
+<br><br>
+<div class="card">
+  <p-table #dt [value]="agglomerations" [globalFilterFields]="['name','country.name','representative.name','status']"
+           [rowHover]="true" dataKey="id"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">Aglomerações</h5>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
+        <th>Imagem</th>
+        <th pSortableColumn="observation">Observação <p-sortIcon field="observation"></p-sortIcon></th>
+        <th pSortableColumn="agglomerationType">Tipo <p-sortIcon field="agglomerationType"></p-sortIcon></th>
+        <th pSortableColumn="location">Localização <p-sortIcon field="location"></p-sortIcon></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td><img [src]="'data:image/jpeg;base64,' + item.image.file" alt="Arquivo Inválido"  width="100" class="p-shadow-4"/></td>
+        <td>{{item.observation}}</td>
+        <td>{{item.agglomerationType}}</td>
+        <td>{{item.location.fullAddress}}</td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editAgglomeration(item)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="delete(item.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Existem {{agglomerations ? agglomerations.length : 0 }} aglomerações registradas.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+<br><br>
+<div style="margin-left: 10%; margin-right: 10%" class="card add-car" *ngIf="showEdit">
+  <h5 class="card-header">Editar Aglomeração ID: {{agglomeration.id}}</h5>
+  <div class="card-body">
+    <form id="add-form" (ngSubmit)="f.form.valid && saveAgglomeration(f)" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" [(ngModel)]="agglomeration.name" id="name" name="name" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+        <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+          <div *ngIf="model.errors.required">Nome é obrigatório</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="observation">Observação</label>
+        <input type="text" [(ngModel)]="agglomeration.observation" id="observation" name="observation" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+      </div>
+      <div class="form-group">
+        <label for="location">Localização</label>
+        <input type="text" [(ngModel)]="location.fullAddress" id="location" name="location" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+        <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+          <div *ngIf="model.errors.required">Localização é obrigatório</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="agglomerationType">Tipo</label>
+        <input type="text" [(ngModel)]="agglomeration.agglomerationType" id="agglomerationType" name="agglomerationType" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+        <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+          <div *ngIf="model.errors.required">Tipo é obrigatório</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-add-car" (click)="getAgglomerations()">Salvar</button>
+      <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanForm(f)">Cancelar</button>
+    </form>
+  </div>
+</div>
