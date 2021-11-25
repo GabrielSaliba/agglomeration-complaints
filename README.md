@@ -1,4 +1,4 @@
-Aplicação para Denúncias de Aglorações
+Aplicação para Denúncias de Aglomerações
 
 TRABALHO FINAL DE LABORATÓRIO DE DESENVOLVIMENTO DE SISTEMAS DE INFORMAÇÃO - PUC MINAS BETIM
 
